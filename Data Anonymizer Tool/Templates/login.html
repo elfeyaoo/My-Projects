@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Register - FBL Data Anonymization Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+  <style>
+    body { background: linear-gradient(to right, #0d6efd, #6c63ff); }
+    .login-card { border-radius: 15px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.2); }
+    .login-header { background-color: #0d6efd; color: #fff; }
+    .show-password-btn { cursor: pointer; }
+    .toggle-link { cursor: pointer; color: #0d6efd; text-decoration: underline; }
+  </style>
+</head>
+<body class="d-flex align-items-center justify-content-center vh-100">
+
+<div class="card login-card w-100" style="max-width: 400px;">
+  <div class="card-header login-header text-center py-4">
+    <h4 class="mb-0"><i class="bi bi-shield-lock-fill me-2"></i>FBL Access</h4>
+    <small class="text-white-50" id="formTitle">Login to your account</small>
+  </div>
+  <div class="card-body p-4">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- LOGIN FORM -->
+    <form method="POST" action="{{ url_for('login') }}" id="loginForm">
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold"><i class="bi bi-person me-1"></i>Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required autocomplete="username">
+      </div>
+      <div class="mb-3 position-relative">
+        <label for="password" class="form-label fw-semibold"><i class="bi bi-key me-1"></i>Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required autocomplete="current-password">
+        <i class="bi bi-eye-fill position-absolute top-50 end-3 translate-middle-y show-password-btn" id="togglePassword"></i>
+      </div>
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="rememberMe" name="remember">
+        <label class="form-check-label" for="rememberMe">Remember Me</label>
+      </div>
+      <div class="d-grid mb-2">
+        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-box-arrow-in-right me-1"></i>Login</button>
+      </div>
+      <div class="text-center">
+        <small>New user? <span class="toggle-link" id="showRegister">Register here</span></small>
+      </div>
+    </form>
+
+    <!-- REGISTER FORM -->
+    <form method="POST" action="{{ url_for('register') }}" id="registerForm" class="d-none">
+      <div class="mb-3">
+        <label for="reg_username" class="form-label fw-semibold"><i class="bi bi-person me-1"></i>Username</label>
+        <input type="text" class="form-control" id="reg_username" name="username" placeholder="Choose username" required autocomplete="username">
+      </div>
+      <div class="mb-3">
+        <label for="reg_password" class="form-label fw-semibold"><i class="bi bi-key me-1"></i>Password</label>
+        <input type="password" class="form-control" id="reg_password" name="password" placeholder="Enter password" required autocomplete="new-password">
+      </div>
+      <div class="mb-3">
+        <label for="reg_confirm_password" class="form-label fw-semibold"><i class="bi bi-key me-1"></i>Confirm Password</label>
+        <input type="password" class="form-control" id="reg_confirm_password" name="confirm_password" placeholder="Confirm password" required autocomplete="new-password">
+      </div>
+      <div class="d-grid mb-2">
+        <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-person-plus-fill me-1"></i>Register</button>
+      </div>
+      <div class="text-center">
+        <small>Already have an account? <span class="toggle-link" id="showLogin">Login here</span></small>
+      </div>
+    </form>
+
+  </div>
+  <div class="card-footer text-center small text-muted py-2">&copy; 2025 Fermenta Biotech Limited</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Toggle show/hide password
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+  togglePassword.addEventListener('click', () => {
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+    togglePassword.classList.toggle('bi-eye-fill');
+    togglePassword.classList.toggle('bi-eye-slash-fill');
+  });
+
+  // Toggle between login and register forms
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const showRegister = document.getElementById('showRegister');
+  const showLogin = document.getElementById('showLogin');
+  const formTitle = document.getElementById('formTitle');
+
+  showRegister.addEventListener('click', () => {
+    loginForm.classList.add('d-none');
+    registerForm.classList.remove('d-none');
+    formTitle.textContent = "Create a new account";
+  });
+  showLogin.addEventListener('click', () => {
+    registerForm.classList.add('d-none');
+    loginForm.classList.remove('d-none');
+    formTitle.textContent = "Login to your account";
+  });
+</script>
+</body>
+</html>

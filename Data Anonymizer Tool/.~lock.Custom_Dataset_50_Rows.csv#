@@ -1,0 +1,83 @@
+# anonymizer.py
+import hashlib
+import pandas as pd
+import random
+from faker import Faker
+
+fake = Faker()
+
+def hash_value(val):
+    """Create a short hash for IDs (irreversible)."""
+    if pd.isna(val):
+        return val
+    return hashlib.sha256(str(val).encode()).hexdigest()[:10]
+
+def mask_phone(val):
+    """Mask phone numbers (keep last 2 digits)."""
+    if pd.isna(val):
+        return val
+    val = str(val)
+    return "X" * (len(val) - 2) + val[-2:]
+
+def perturb_numeric(val, pct=10):
+    """Add ±pct% random noise to numeric values."""
+    try:
+        val = float(val)
+        factor = 1 + random.uniform(-pct/100, pct/100)
+        return round(val * factor, 2)
+    except Exception:
+        return val
+
+def generalize_date(val):
+    """Convert full date to Month-Year."""
+    try:
+        dt = pd.to_datetime(val)
+        return dt.strftime("%Y-%m")
+    except Exception:
+        return val
+
+def anonymize_dataframe(df, mode="field-wise", percentage=50):
+    """Apply anonymization rules to a dataframe."""
+    anon_df = df.copy()
+
+    # Determine rows to anonymize
+    num_rows = len(df)
+    rows_to_mask = int((percentage / 100) * num_rows)
+
+    if mode == "all-rows":
+        target_rows = anon_df.index
+    else:
+        target_rows = anon_df.sample(n=rows_to_mask, random_state=42).index
+
+    for col in anon_df.columns:
+        col_lower = col.lower()
+
+        # IDs → Hash
+        if "id" in col_lower:
+            anon_df.loc[target_rows, col] = anon_df.loc[target_rows, col].apply(hash_value)
+
+        # Customer Name → Fake
+        elif "name" in col_lower:
+            anon_df.loc[target_rows, col] = [fake.name() for _ in range(len(target_rows))]
+
+        # Email → Fake
+        elif "email" in col_lower:
+            anon_df.loc[target_rows, col] = [fake.email() for _ in range(len(target_rows))]
+
+        # Phone → Mask
+        elif "phone" in col_lower:
+            anon_df.loc[target_rows, col] = anon_df.loc[target_rows, col].apply(mask_phone)
+
+        # Price / Quantity → Perturb
+        elif "price" in col_lower or "quantity" in col_lower:
+            anon_df.loc[target_rows, col] = anon_df.loc[target_rows, col].apply(perturb_numeric)
+
+        # Dates → Generalize
+        elif "date" in col_lower:
+            anon_df.loc[target_rows, col] = anon_df.loc[target_rows, col].apply(generalize_date)
+
+        # Fallback: redact text columns
+        elif anon_df[col].dtype == "object":
+            anon_df.loc[target_rows, col] = "***REDACTED***"
+
+    return anon_df

@@ -1,0 +1,51 @@
+CustomerID,CustomerName,PhoneNumber,Email,OrderID,OrderDate,DeliveryDate
+CUST001,Peter Clark,(850)994-3287,aanderson@example.org,ORD0001,2025-02-25,2025-07-15
+CUST002,Dr. Christian Flores,+1-213-302-5162x69030,yclark@example.org,ORD0002,2024-12-31,2025-02-27
+CUST003,Shelly Buckley,405.222.2003x32061,dawn86@example.com,ORD0003,2025-03-14,2025-09-01
+CUST004,Amy Carroll,+1-511-719-2684,lisa39@example.net,ORD0004,2024-10-07,2025-09-19
+CUST005,Kari Woodard,+1-550-402-9109x058,davisdanielle@example.com,ORD0005,2025-01-03,2025-04-17
+CUST006,Adam Orr,+1-920-346-6421x3473,tmorales@example.com,ORD0006,2025-07-10,2025-07-14
+CUST007,Rachel Buchanan,+1-824-206-1267x2874,fisherbenjamin@example.org,ORD0007,2025-06-07,2025-07-23
+CUST008,Rebecca Jordan,+1-809-235-2807x17507,plopez@example.org,ORD0008,2025-07-22,2025-08-15
+CUST009,Timothy Mcbride,001-390-808-2992x7866,martha08@example.net,ORD0009,2025-09-07,2025-09-11
+CUST010,Francis Campbell,229-561-7532x845,victor45@example.org,ORD0010,2025-05-14,2025-05-22
+CUST011,Kaitlyn Moreno,769-791-2600,brandy46@example.com,ORD0011,2024-11-20,2025-07-25
+CUST012,Ashley Vazquez,993.270.7730x29026,aflores@example.net,ORD0012,2024-10-13,2025-09-19
+CUST013,Emily Jacobs,001-745-443-3419x6807,nancy03@example.com,ORD0013,2025-06-28,2025-09-24
+CUST014,Eric Christian,3599174320,tmcmahon@example.org,ORD0014,2025-01-20,2025-05-31
+CUST015,David Smith,949-507-3715x3156,andreatucker@example.com,ORD0015,2025-09-09,2025-09-13
+CUST016,Emily Holt,(952)626-8057x3475,bellerik@example.com,ORD0016,2025-08-29,2025-09-28
+CUST017,Stephen Barr,+1-735-916-3231,gomezjennifer@example.net,ORD0017,2024-12-14,2025-09-08
+CUST018,Thomas Trujillo,675-766-3359x2596,eileenthomas@example.com,ORD0018,2024-12-14,2025-02-11
+CUST019,Steven Gonzalez Jr.,001-899-300-6759x94216,ghebert@example.net,ORD0019,2025-07-31,2025-09-23
+CUST020,Zachary Smith,+1-404-739-0458x765,ijohnson@example.net,ORD0020,2025-05-06,2025-07-20
+CUST021,Scott Fuller,(556)769-3981,jlucero@example.net,ORD0021,2025-06-04,2025-09-13
+CUST022,Donald Larson,(930)989-7061,ejones@example.com,ORD0022,2025-05-02,2025-06-01
+CUST023,Harry Dillon,(305)683-9121x32693,thompsonclinton@example.net,ORD0023,2025-05-31,2025-07-07
+CUST024,Lee Davis,(372)457-2615,turnerkevin@example.com,ORD0024,2025-03-16,2025-05-29
+CUST025,Donald Jones,(458)900-3465x012,arodriguez@example.com,ORD0025,2025-05-29,2025-06-23
+CUST026,Mark Hayes,421.707.5583,riverajohn@example.com,ORD0026,2025-07-20,2025-09-10
+CUST027,Shannon Hart,001-978-820-6351x6830,arodriguez@example.com,ORD0027,2024-12-14,2025-02-11
+CUST028,Alexandria Johnson,(745)720-2462,sanchezjason@example.net,ORD0028,2024-11-14,2025-04-28
+CUST029,Michael Velasquez,(747)240-2819x45255,qcampbell@example.com,ORD0029,2024-12-09,2025-07-10
+CUST030,David Martinez,853-243-1456x9068,charlessantiago@example.org,ORD0030,2025-08-07,2025-09-25
+CUST031,Julie Pitts,792-380-8296x6952,ycarrillo@example.com,ORD0031,2025-04-03,2025-06-06
+CUST032,Maurice Harper III,(452)830-1123x205,doyledaniel@example.org,ORD0032,2024-10-09,2024-10-13
+CUST033,Antonio Mendoza,(475)520-5950x2301,wkelley@example.net,ORD0033,2025-07-09,2025-08-15
+CUST034,Megan Delgado,+1-978-733-2378x36827,amanda15@example.org,ORD0034,2025-02-12,2025-04-03
+CUST035,Lisa Beltran,001-661-557-6769x67237,allentravis@example.org,ORD0035,2025-03-10,2025-04-05
+CUST036,Dr. Anthony Herrera DVM,3529893269,thomasronnie@example.com,ORD0036,2025-05-27,2025-09-01
+CUST037,Samantha Knight,391.818.0636x990,grimesjessica@example.org,ORD0037,2025-01-12,2025-04-12
+CUST038,Andrew Harper,001-524-512-7700x66036,hooperanna@example.com,ORD0038,2024-12-17,2025-03-30
+CUST039,Samuel Smith,(782)238-0331,rvaughan@example.org,ORD0039,2025-01-19,2025-07-09
+CUST040,Norma Rice,743.294.3458,amanda71@example.org,ORD0040,2025-07-10,2025-08-16
+CUST041,Edward Vincent,001-519-591-4286x71511,natasha54@example.org,ORD0041,2025-05-05,2025-08-27
+CUST042,Elizabeth Johnson,(868)433-7212x4775,ipeters@example.org,ORD0042,2025-03-20,2025-09-07
+CUST043,Amanda Weiss,509.667.6323,nhamilton@example.org,ORD0043,2025-04-22,2025-06-13
+CUST044,Ashley Romero,984.665.6230x246,spowers@example.org,ORD0044,2024-12-23,2025-06-07
+CUST045,Dalton Nolan,4543459799,nicholasreeves@example.org,ORD0045,2025-06-02,2025-08-29
+CUST046,Michael Davis,491.431.7935x275,jeffersontoni@example.net,ORD0046,2025-08-07,2025-09-13
+CUST047,Kelly Smith,+1-859-990-3300x54658,andrew19@example.net,ORD0047,2025-08-11,2025-09-30
+CUST048,Benjamin Kent,8287668365,heatherlove@example.com,ORD0048,2025-05-30,2025-07-09
+CUST049,Melissa Martinez,(517)699-4993x871,kclark@example.org,ORD0049,2025-02-05,2025-08-12
+CUST050,James Perkins,7117273275,jonathan48@example.org,ORD0050,2024-10-31,2025-03-27
