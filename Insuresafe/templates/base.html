@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+        {% block title %}InsureSafe{% endblock %}
+    </title>
+
+    <!-- ===================================================== -->
+    <!-- BOOTSTRAP CSS -->
+    <!-- ===================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- ===================================================== -->
+    <!-- CUSTOM CSS -->
+    <!-- ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <!-- ===================================================== -->
+    <!-- FONT AWESOME ICONS -->
+    <!-- ===================================================== -->
+
+    <script
+        src="https://kit.fontawesome.com/a2d9d6f3a1.js"
+        crossorigin="anonymous"
+    ></script>
+
+</head>
+
+<body>
+
+    <!-- ===================================================== -->
+    <!-- NAVBAR -->
+    <!-- ===================================================== -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+
+            <a
+                class="navbar-brand fw-bold"
+                href="{{ url_for('index') }}"
+            >
+                Insure<span class="text-primary">Safe</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navMenu"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+                class="collapse navbar-collapse"
+                id="navMenu"
+            >
+
+                <ul class="navbar-nav ms-auto">
+
+                    {% if session.get('user_id') %}
+
+                        {% if session.get('role') == 'admin' %}
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="{{ url_for('logout') }}"
+                                >
+                                    Logout
+                                </a>
+                            </li>
+
+                        {% else %}
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="{{ url_for('policies') }}"
+                                >
+                                    Get Policy
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="{{ url_for('profile') }}"
+                                >
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="{{ url_for('dashboard') }}"
+                                >
+                                    Claims
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="{{ url_for('logout') }}"
+                                >
+                                    Logout
+                                </a>
+                            </li>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="{{ url_for('policies') }}"
+                            >
+                                Get Policy
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="{{ url_for('dashboard') }}"
+                            >
+                                Claims
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link btn btn-primary text-white px-3 ms-2"
+                                href="{{ url_for('login') }}"
+                            >
+                                Login
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================================================== -->
+    <!-- HERO SECTION -->
+    <!-- ===================================================== -->
+
+    {% block hero %}
+    <!-- Optional Hero Section -->
+    {% endblock %}
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <main
+        class="container"
+        style="padding-top:120px; padding-bottom:50px;"
+    >
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info">
+                    {% for m in messages %}
+                        {{ m }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <!-- ===================================================== -->
+    <!-- FOOTER -->
+    <!-- ===================================================== -->
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center small">
+            © {{ current_year if current_year else '2025' }}
+            InsureSafe — Secure Your Future with Confidence.
+        </div>
+    </footer>
+
+    <!-- ===================================================== -->
+    <!-- FLOATING AI CHATBOT -->
+    <!-- ===================================================== -->
+
+    <!-- Chatbot Toggle Button -->
+    <div id="chatbot-toggle">
+        <button
+            class="btn btn-primary rounded-circle shadow"
+        >
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <!-- Chatbot Box -->
+    <div
+        id="chatbot-box"
+        class="card shadow-lg"
+    >
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+
+            <strong>
+                AI Policy Assistant
+            </strong>
+
+            <button
+                id="close-chatbot"
+                class="btn btn-sm btn-light"
+            >
+                ✕
+            </button>
+
+        </div>
+
+        <!-- Messages -->
+        <div
+            id="chat-messages"
+            class="card-body"
+            style="height: 350px; overflow-y: auto;"
+        >
+
+            <div class="mb-2">
+                <strong>Bot:</strong><br>
+
+                Hello 👋 Welcome to InsureSafe!
+
+                <br><br>
+
+                I can help you with:
+
+                <br>
+                ✓ Which policy should you choose
+                <br>
+                ✓ Low premium policy suggestions
+                <br>
+                ✓ Health / Life / Car / Family insurance
+                <br>
+                ✓ Claim settlement ratio
+                <br>
+                ✓ Best policy based on your income
+
+                <br><br>
+
+                Example:
+                <br>
+                "I don't know which policy to apply for"
+            </div>
+
+        </div>
+
+        <!-- Input -->
+        <div class="card-footer">
+
+            <form id="chat-form">
+                <div class="input-group">
+
+                    <input
+                        type="text"
+                        id="user-message"
+                        class="form-control"
+                        placeholder="Ask about insurance policies..."
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Send
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- CHATBOT STYLE -->
+    <!-- ===================================================== -->
+
+    <style>
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        #chatbot-toggle button {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+        }
+
+        #chatbot-box {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            display: none;
+            z-index: 9999;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+    </style>
+
+    <!-- ===================================================== -->
+    <!-- BOOTSTRAP JS -->
+    <!-- ===================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ===================================================== -->
+    <!-- CHATBOT SCRIPT -->
+    <!-- ===================================================== -->
+
+    <script>
+        const chatbotToggle = document.getElementById("chatbot-toggle");
+        const chatbotBox = document.getElementById("chatbot-box");
+        const closeChatbot = document.getElementById("close-chatbot");
+        const chatForm = document.getElementById("chat-form");
+        const userMessage = document.getElementById("user-message");
+        const chatMessages = document.getElementById("chat-messages");
+
+        chatbotToggle.addEventListener("click", () => {
+            chatbotBox.style.display = "block";
+        });
+
+        closeChatbot.addEventListener("click", () => {
+            chatbotBox.style.display = "none";
+        });
+
+        chatForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const message = userMessage.value.trim();
+
+            if (!message) return;
+
+            chatMessages.innerHTML += `
+                <div class="mb-2">
+                    <strong>You:</strong><br>
+                    ${message}
+                </div>
+            `;
+
+            userMessage.value = "";
+
+            const response = await fetch("/chatbot", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            });
+
+            const data = await response.json();
+
+            chatMessages.innerHTML += `
+                <div class="mb-2">
+                    <strong>Bot:</strong><br>
+                    ${data.reply}
+                </div>
+            `;
+
+            chatMessages.scrollTop =
+                chatMessages.scrollHeight;
+        });
+    </script>
+
+</body>
+</html>
